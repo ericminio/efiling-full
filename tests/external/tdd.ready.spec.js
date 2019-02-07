@@ -4,10 +4,8 @@ const { expect } = require('chai');
 describe('Selenium', function() {
 
     var server;
-    var driver;
 
     beforeEach(function(done) {
-        driver = new Builder().forBrowser('firefox').build();
         server = require('http').createServer(function(request, response) {
             var index =
             `
@@ -25,28 +23,21 @@ describe('Selenium', function() {
 
     afterEach(function() {
         server.close();
-        driver.quit();
     });
 
-    it('is ready', function(done) {
-        driver.get('http://localhost:5000/').then(
-            function() {
-                var element = driver.findElement(By.id('greetings'));
-                element.getText().then(
-                    function(value) {
-                        expect(value).to.equal('welcome');
-                        done();
-                    },
-                    function(error) {
-                        expect(JSON.stringify(error)).to.equal(undefined);
-                        done();
-                    }
-                );
-            },
-            function(error) {
-                expect(JSON.stringify(error)).to.equal(undefined);
-                done();
-            }
-        );
+    it('is ready', async function() {
+        let driver = await new Builder().forBrowser('firefox').build();
+        try {
+            await driver.get('http://localhost:5000');
+            let element = await driver.findElement(By.id('greetings'));
+            let value = await element.getText()
+            expect(value).to.equal('welcome');
+        }
+        catch (error) {
+            expect(error).to.equal(undefined)
+        }
+        finally {
+            await driver.quit();
+        }
     });
 });
