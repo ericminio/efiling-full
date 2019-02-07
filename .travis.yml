@@ -6,7 +6,24 @@ env:
 addons:
   firefox: "65.0"
 install:
+  - cd $TRAVIS_BUILD_DIR/frontend
   - yarn
+  - cd $TRAVIS_BUILD_DIR/api
+  - yarn
+  - cd $TRAVIS_BUILD_DIR
+  - yarn
+before_script:
+  - export NODE_ENV=development
+  - export OPENSHIFT_NODEJS_PORT=8081
+  - export REACT_APP_API_URL=http://localhost:3333/court-of-appeal
+  - export BROWSER=none
+  - cd $TRAVIS_BUILD_DIR/api
+  - node tests/support/fake.site.minder.js &
+  - node start.with.fake.credentials.js &
+  - cd $TRAVIS_BUILD_DIR/frontend
+  - npm run start &
+  - cd $TRAVIS_BUILD_DIR
   - export PATH=$PATH:$TRAVIS_BUILD_DIR/tests/support/webdriver/linux
+  - sleep 60
 script:
   - npm run test
