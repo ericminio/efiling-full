@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "10.15.1"
+addons:
+  firefox: latest
+install:
+  - yarn
+  - export PATH=$PATH:$TRAVIS_BUILD_DIR/tests/support/webdriver/linux
+script:
+  - npm run test

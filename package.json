@@ -1,0 +1,20 @@
+{
+  "name": "efiling-full",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "npm run external-tests",
+    "external-tests": "mocha tests/external --recursive --exit --timeout 0"
+  },
+  "author": "ericminio",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  }
+}
