@@ -4,7 +4,7 @@ node_js:
 env:
   - MOZ_HEADLESS=1
 addons:
-  firefox: latest
+  firefox: "65.0"
 install:
   - yarn
   - export PATH=$PATH:$TRAVIS_BUILD_DIR/tests/support/webdriver/linux
