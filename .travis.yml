@@ -24,8 +24,9 @@ before_script:
   - export OPENSHIFT_NODEJS_PORT=8081
   - export REACT_APP_API_URL=http://localhost:3333/court-of-appeal
   - export BROWSER=none
-  - cd $TRAVIS_BUILD_DIR/api
+  - cd $TRAVIS_BUILD_DIR/frontend
   - node tests/support/fake.site.minder.js &
+  - cd $TRAVIS_BUILD_DIR/api
   - node start.with.fake.credentials.js &
   - cd $TRAVIS_BUILD_DIR/frontend
   - npm run start &
