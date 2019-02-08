@@ -19,7 +19,7 @@ before_script:
   - export PGDATABASE=ci
   - export PGUSER=postgres
   - export PGPASSWORD=
-  - psql -U postgres -c "create database $PGDATABASE"
+  - createdb $PGDATABASE
   - export NODE_ENV=development
   - export OPENSHIFT_NODEJS_PORT=8081
   - export REACT_APP_API_URL=http://localhost:3333/court-of-appeal
