@@ -12,23 +12,29 @@ install:
   - yarn
   - cd $TRAVIS_BUILD_DIR/api
   - yarn
+  - cd $TRAVIS_BUILD_DIR/hub/src/test/support/fake.cso
+  - yarn
   - cd $TRAVIS_BUILD_DIR
   - yarn
 before_script:
+  - cd $TRAVIS_BUILD_DIR/hub/src/test/support/fake.cso
+  - npm run start &
+  - cd $TRAVIS_BUILD_DIR/hub
+  - mvn test-compile exec:java -Pagainst-fake-cso &
+  - cd $TRAVIS_BUILD_DIR/api
+  - export HUB_URL=http://localhost:8888
   - export PGHOST=localhost
   - export PGDATABASE=ci
   - export PGUSER=postgres
   - export PGPASSWORD=
   - createdb $PGDATABASE
-  - export NODE_ENV=development
   - export OPENSHIFT_NODEJS_PORT=8081
-  - export REACT_APP_API_URL=http://localhost:3333/court-of-appeal
-  - export BROWSER=none
-  - cd $TRAVIS_BUILD_DIR/frontend
-  - node tests/support/fake.site.minder.js &
-  - cd $TRAVIS_BUILD_DIR/api
   - node start.with.fake.credentials.js &
   - cd $TRAVIS_BUILD_DIR/frontend
+  - node tests/support/fake.site.minder.js &
+  - export NODE_ENV=development
+  - export REACT_APP_API_URL=http://localhost:3333/court-of-appeal
+  - export BROWSER=none
   - npm run start &
   - cd $TRAVIS_BUILD_DIR
   - export PATH=$PATH:$TRAVIS_BUILD_DIR/tests/support/webdriver/linux
