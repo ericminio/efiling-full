@@ -25,6 +25,7 @@ describe('Form2 creation', function() {
         await file.sendKeys('CA12345')
         let find = await driver.findElement(By.id('find-button'))
         await find.click()
+        await driver.sleep(1000)
         let appelants = await driver.findElement(By.id('appellant-name'))
         let value = await appelants.getText()
 
