@@ -24,6 +24,7 @@ describe('Welcome page', function() {
 
     it('welcomes the user', async ()=> {
         await driver.get('http://localhost:3000')
+        await driver.sleep(1000)
         let element = await driver.findElement(By.id('greetings'))
         let value = await element.getText()
 
