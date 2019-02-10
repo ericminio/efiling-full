@@ -1,12 +1,12 @@
 [submodule "frontend"]
 	path = frontend
-	url = git@github.com:ericminio/jag-efiling-frontend.git
+	url = https://github.com/ericminio/jag-efiling-frontend.git
     branch = master
 [submodule "api"]
 	path = api
-	url = git@github.com:ericminio/jag-efiling-api.git
+	url = https://github.com/ericminio/jag-efiling-api.git
     branch = master
 [submodule "hub"]
 	path = hub
-	url = git@github.com:ericminio/jag-efiling-hub.git
+	url = https://github.com/ericminio/jag-efiling-hub.git
     branch = master
