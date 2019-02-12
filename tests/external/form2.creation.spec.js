@@ -31,6 +31,9 @@ describe('Form2 creation', function() {
 
         expect(value).to.equal('Max FREE, MAX SUPERFREE')
 
+        let check = await driver.findElement(By.id('respondentCheckbox-0'))
+        await check.click()
+
         let phone = await driver.findElement(By.id('phone'))
         await phone.sendKeys('7783501234')
         let save = await driver.findElement(By.id('draft'))
