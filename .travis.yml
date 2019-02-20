@@ -25,7 +25,8 @@ before_script:
   - export COA_SEARCH_ENDPOINT=http4://localhost:5005/search
   - export COA_NAMESPACE=ignored-by-fake-cso
   - export COA_SEARCH_SOAP_ACTION=ignored-by-fake-cso
-  - export COA_VIEW_CASE_PARTY_SOAP_ACTION=second-call
+  - export COA_VIEW_CASE_BASICS_SOAP_ACTION=second-call
+  - export COA_VIEW_CASE_PARTY_SOAP_ACTION=third-call
   - mvn test-compile exec:java -Pagainst-fake-cso &
   - cd $TRAVIS_BUILD_DIR/api
   - export HUB_URL=http://localhost:8888
