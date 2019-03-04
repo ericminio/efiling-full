@@ -25,16 +25,11 @@ describe('Form2 creation', function() {
         await file.sendKeys('CA12345')
         let find = await driver.findElement(By.id('find-button'))
         await find.click()
-        await driver.sleep(1000)
+        await driver.sleep(1500)
         let appelants = await driver.findElement(By.id('appellant-name'))
         let value = await appelants.getText()
 
         expect(value).to.equal('Max FREE, MAX SUPERFREE')
-
-        let list = await driver.findElement(By.id('respondent-list'))
-        await list.click()
-        let choice = await list.findElement(By.id('react-select-2-option-0'))
-        await choice.click()
 
         let phone = await driver.findElement(By.id('phone'))
         await phone.sendKeys('7783501234')
