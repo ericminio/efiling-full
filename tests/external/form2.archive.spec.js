@@ -2,7 +2,7 @@ const { Builder, By } = require('selenium-webdriver');
 const { expect } = require('chai');
 var { execute } = require('yop-postgresql');
 
-describe.only('Form2 archiving', function() {
+describe('Form2 archiving', function() {
 
     var server
     var driver
