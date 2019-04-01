@@ -1,6 +1,6 @@
 const { By } = require('selenium-webdriver')
 
-var Page = function(driver) {
+var Page = function(driver, options) {
     this.driver = driver
 }
 Page.prototype.open = async function(url) {
