@@ -1,5 +1,4 @@
 const { expect } = require('chai')
-const { execute } = require('yop-postgresql')
 const { firefox } = require('../support/pages/commons')
 const { HomePage, Form2CreationPage } = require('../support/pages')
 
@@ -10,10 +9,7 @@ describe('Form2 creation', function() {
 
     before((done)=> {
         driver = firefox()
-        execute('TRUNCATE TABLE forms;', function(rows, error) {
-            expect(error).to.equal(undefined)
-            done();
-        });
+        cleanDatabase(done)
     })
 
     after(async ()=> {

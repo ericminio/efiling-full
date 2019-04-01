@@ -1,6 +1,6 @@
 const { expect } = require('chai')
-const { execute } = require('yop-postgresql')
 const { firefox } = require('../support/pages/commons')
+const { cleanDatabase } = require('../support/data/clean.database')
 const { Form2CreationPage, MyDocumentsPage } = require('../support/pages')
 
 describe('Form2 archiving', function() {
@@ -10,14 +10,7 @@ describe('Form2 archiving', function() {
 
     before((done)=> {
         driver = firefox()
-        var clean = [
-            'TRUNCATE TABLE forms;',
-            'alter sequence forms_id_seq restart'
-        ]
-        execute(clean, (rows, error)=> {
-            expect(error).to.equal(undefined)
-            done();
-        });
+        cleanDatabase(done)
     })
 
     after(async ()=> {
