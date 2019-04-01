@@ -1,16 +1,15 @@
 const { expect } = require('chai')
 const { execute } = require('yop-postgresql')
-const { Builder } = require('selenium-webdriver')
+const { firefox } = require('../support/pages/commons')
 const { Form2CreationPage, MyDocumentsPage } = require('../support/pages')
 
 describe('Form2 archiving', function() {
 
-    var base = 'http://localhost:3000'
     var driver
     var page
 
     before((done)=> {
-        driver = new Builder().forBrowser('firefox').build()
+        driver = firefox()
         var clean = [
             'TRUNCATE TABLE forms;',
             'alter sequence forms_id_seq restart'
@@ -26,12 +25,12 @@ describe('Form2 archiving', function() {
     })
 
     it('works', async ()=> {
-        page = new Form2CreationPage(driver, base)
+        page = new Form2CreationPage(driver)
         await page.search('CA12345')
         await page.setPhone('7783501234')
         await page.save()
 
-        page = new MyDocumentsPage(driver, base)
+        page = new MyDocumentsPage(driver)
         expect(await page.casesSize()).to.equal(1)
 
         await page.select(1)

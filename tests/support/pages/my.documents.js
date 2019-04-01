@@ -1,12 +1,12 @@
 const { By } = require('selenium-webdriver')
+const { base } = require('./commons')
 
-var MyDocumentsPage = function(driver, url) {
+var MyDocumentsPage = function(driver) {
     this.driver = driver
-    this.base = url
     this.refresh()
 }
 MyDocumentsPage.prototype.refresh = async function() {
-    await this.driver.get(this.base + '/my-documents.html')
+    await this.driver.get(base + '/my-documents.html')
 }
 MyDocumentsPage.prototype.select = async function(id) {
     let check = await this.driver.findElement(By.id('select-'+id))

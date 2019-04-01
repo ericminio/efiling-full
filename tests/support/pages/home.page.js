@@ -1,12 +1,12 @@
 const { By } = require('selenium-webdriver')
+const { base } = require('./commons')
 
-var HomePage = function(driver, url) {
+var HomePage = function(driver) {
     this.driver = driver
-    this.base = url
     this.refresh()
 }
 HomePage.prototype.refresh = async function() {
-    await this.driver.get(this.base)
+    await this.driver.get(base)
 }
 HomePage.prototype.casesSize = async function() {
     await this.driver.sleep(1000)

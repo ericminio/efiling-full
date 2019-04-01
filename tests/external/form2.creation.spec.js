@@ -1,16 +1,15 @@
 const { expect } = require('chai')
 const { execute } = require('yop-postgresql')
-const { Builder } = require('selenium-webdriver')
+const { firefox } = require('../support/pages/commons')
 const { HomePage, Form2CreationPage } = require('../support/pages')
 
 describe('Form2 creation', function() {
 
-    var base = 'http://localhost:3000'
     var driver
     var page
 
     before((done)=> {
-        driver = new Builder().forBrowser('firefox').build()
+        driver = firefox()
         execute('TRUNCATE TABLE forms;', function(rows, error) {
             expect(error).to.equal(undefined)
             done();
@@ -22,15 +21,15 @@ describe('Form2 creation', function() {
     })
 
     it('works', async ()=> {
-        page = new HomePage(driver, base)
+        page = new HomePage(driver)
         expect(await page.casesSize()).to.equal(0)
 
-        page = new Form2CreationPage(driver, base)
+        page = new Form2CreationPage(driver)
         await page.search('CA12345')
         await page.setPhone('7783501234')
         await page.save()
 
-        page = new HomePage(driver, base)
+        page = new HomePage(driver)
         expect(await page.casesSize()).to.equal(1)
     })
 })

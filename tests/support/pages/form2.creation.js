@@ -1,12 +1,12 @@
 const { By } = require('selenium-webdriver')
+const { base } = require('./commons')
 
-var Form2CreationPage = function(driver, url) {
+var Form2CreationPage = function(driver) {
     this.driver = driver
-    this.base = url
     this.refresh()
 }
 Form2CreationPage.prototype.refresh = async function() {
-    await this.driver.get(this.base + '/form.2.html')
+    await this.driver.get(base + '/form.2.html')
 }
 Form2CreationPage.prototype.search = async function(file) {
     let toto = await this.driver.findElement(By.id('file-no'))
