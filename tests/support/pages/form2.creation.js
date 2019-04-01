@@ -8,6 +8,7 @@ module.exports = (driver)=>{
     page.search = async (file)=>{
         await page.input('#file-no', file)
         await page.click('#find-button')
+        await page.wait(1000)
     }
     page.setPhone = async (value)=>{
         await page.input('#phone', value)

@@ -6,7 +6,7 @@ module.exports = (driver)=>{
     page.open(base)
 
     page.casesSize = async ()=>{
-        await driver.sleep(1000)
+        await page.wait(1000)
         return (await page.list('table#my-cases tbody tr')).length
     }
 

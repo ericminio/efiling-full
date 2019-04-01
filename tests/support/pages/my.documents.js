@@ -13,7 +13,7 @@ module.exports = (driver)=>{
         await page.click('#yes-archive')
     }
     page.casesSize = async function() {
-        await driver.sleep(1000)
+        await page.wait(1000)
         return (await page.list('table#my-cases tbody tr')).length
     }
 
