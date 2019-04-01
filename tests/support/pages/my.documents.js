@@ -1,27 +1,22 @@
 const { By } = require('selenium-webdriver')
 const { base } = require('./commons')
+const { Page } = require('./page')
 
 var MyDocumentsPage = function(driver) {
     this.driver = driver
-    this.refresh()
-}
-MyDocumentsPage.prototype.refresh = async function() {
-    await this.driver.get(base + '/my-documents.html')
+    this.page = new Page(driver)
+    this.page.open(base + '/my-documents.html')
 }
 MyDocumentsPage.prototype.select = async function(id) {
-    let check = await this.driver.findElement(By.id('select-'+id))
-    await check.click()
+    await this.page.click('#select-'+id)
 }
 MyDocumentsPage.prototype.archive = async function() {
-    let archive = await this.driver.findElement(By.id('archive-button'))
-    await archive.click()
-    let yesarchive = await this.driver.findElement(By.id('yes-archive'))
-    await yesarchive.click()
+    await this.page.click('#archive-button')
+    await this.page.click('#yes-archive')
 }
 MyDocumentsPage.prototype.casesSize = async function() {
     await this.driver.sleep(1000)
-    let cases = await this.driver.findElements(By.css('table#my-cases tbody tr'))
-    return cases.length
+    return (await this.page.list('table#my-cases tbody tr')).length
 }
 
 module.exports = MyDocumentsPage
