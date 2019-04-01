@@ -1,11 +1,13 @@
-const { Builder, By } = require('selenium-webdriver');
-const { expect } = require('chai');
-var { execute } = require('yop-postgresql');
+const { expect } = require('chai')
+const { execute } = require('yop-postgresql')
+const { Builder } = require('selenium-webdriver')
+const { Form2CreationPage, MyDocumentsPage } = require('../support/pages')
 
 describe('Form2 archiving', function() {
 
-    var server
+    var base = 'http://localhost:3000'
     var driver
+    var page
 
     before((done)=> {
         driver = new Builder().forBrowser('firefox').build()
@@ -24,35 +26,16 @@ describe('Form2 archiving', function() {
     })
 
     it('works', async ()=> {
-        await driver.get('http://localhost:3000/form.2.html')
-        let file = await driver.findElement(By.id('file-no'))
-        await file.sendKeys('CA12345')
-        let find = await driver.findElement(By.id('find-button'))
-        await find.click()
-        await driver.sleep(1500)
-        let appelants = await driver.findElement(By.id('appellant-name'))
-        let value = await appelants.getText()
+        page = new Form2CreationPage(driver, base)
+        await page.search('CA12345')
+        await page.setPhone('7783501234')
+        await page.save()
 
-        expect(value).to.equal('Max FREE, MAX SUPERFREE')
+        page = new MyDocumentsPage(driver, base)
+        expect(await page.casesSize()).to.equal(1)
 
-        let phone = await driver.findElement(By.id('phone'))
-        await phone.sendKeys('7783501234')
-        let save = await driver.findElement(By.id('draft'))
-        await save.click()
-
-        await driver.get('http://localhost:3000/my-documents.html')
-        await driver.sleep(1000)
-        let cases = await driver.findElements(By.css('table#my-cases tbody tr'))
-        expect(cases.length).to.equal(1)
-
-        let check = await driver.findElement(By.id('select-1'))
-        await check.click()
-        let archive = await driver.findElement(By.id('archive-button'))
-        await archive.click()
-        let yesarchive = await driver.findElement(By.id('yes-archive'))
-        await yesarchive.click()
-
-        cases = await driver.findElements(By.css('table#my-cases tbody tr'))
-        expect(cases.length).to.equal(0)
+        await page.select(1)
+        await page.archive()
+        expect(await page.casesSize()).to.equal(0)
     })
 })
