@@ -12,6 +12,10 @@ module.exports = (driver)=>{
         await page.click('#archive-button')
         await page.click('#yes-archive')
     }
+    page.download = async function() {
+        await page.click('#download-button')
+        await page.wait(3000)
+    }
     page.casesSize = async function() {
         await page.wait(1000)
         return (await page.list('table#my-cases tbody tr')).length
