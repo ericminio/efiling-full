@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const { firefox } = require('../support/pages/commons')
 const { cleanDatabase } = require('../support/data/clean.database')
 const { Form2CreationPage, MyDocumentsPage } = require('../support/pages')
-const { unzip, fs, path, root } = require('../support/file')
+const { unzipPdfs, fs, path, root, extractFileNo } = require('../support/file')
 
 describe('Form2 download', function() {
 
@@ -39,9 +39,9 @@ describe('Form2 download', function() {
         await page.select(2)
         await page.download()
 
-        var files = await unzip(zip)
+        var files = await unzipPdfs(zip, extractFileNo)
         expect(files.length).to.equal(2)
-        expect(files).to.deep.include({ path:'form2-1.pdf', fileno:'A11111' })
-        expect(files).to.deep.include({ path:'form2-2.pdf', fileno:'A22222' })
+        expect(files).to.deep.include({ path:'form2-1.pdf', data:{ fileno:'A11111' } })
+        expect(files).to.deep.include({ path:'form2-2.pdf', data:{ fileno:'A22222' } })
     })
 })
