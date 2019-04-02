@@ -1,6 +1,7 @@
 const { expect } = require('chai')
 const { firefox } = require('../support/pages/commons')
-const { HomePage, Form2CreationPage } = require('../support/pages')
+const { cleanDatabase } = require('../support/data/clean.database')
+const { HomePage, Form2CreationPage, caseListSize } = require('../support/pages')
 
 describe('Form2 creation', function() {
 
@@ -18,7 +19,7 @@ describe('Form2 creation', function() {
 
     it('works', async ()=> {
         page = await HomePage(driver)
-        expect(await page.caseListSize()).to.equal(0)
+        expect(await caseListSize(page)).to.equal(0)
 
         page = await Form2CreationPage(driver)
         await page.search('CA12345')
@@ -26,6 +27,6 @@ describe('Form2 creation', function() {
         await page.save()
 
         page = await HomePage(driver)
-        expect(await page.caseListSize()).to.equal(1)
+        expect(await caseListSize(page)).to.equal(1)
     })
 })

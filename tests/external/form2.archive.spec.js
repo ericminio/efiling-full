@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 const { firefox } = require('../support/pages/commons')
 const { cleanDatabase } = require('../support/data/clean.database')
-const { Form2CreationPage, MyDocumentsPage } = require('../support/pages')
+const { HomePage, Form2CreationPage, MyDocumentsPage, caseListSize } = require('../support/pages')
 
 describe('Form2 archiving', function() {
 
@@ -24,10 +24,12 @@ describe('Form2 archiving', function() {
         await page.save()
 
         page = await MyDocumentsPage(driver)
-        expect(await page.caseListSize()).to.equal(1)
-
+        expect(await caseListSize(page)).to.equal(1)
         await page.select(1)
         await page.archive()
-        expect(await page.caseListSize()).to.equal(0)
+        expect(await caseListSize(page)).to.equal(0)
+
+        page = await HomePage(driver)
+        expect(await caseListSize(page)).to.equal(0)
     })
 })

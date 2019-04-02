@@ -17,10 +17,6 @@ module.exports = async (driver)=>{
         await page.click('#download-button')
         await page.wait(3000)
     }
-    page.caseListSize = async function() {
-        await page.wait(1000)
-        return (await page.list('table#my-cases tbody tr')).length
-    }
 
     return page
 }
