@@ -1,9 +1,9 @@
 const { base } = require('./commons')
 const { Page } = require('./page')
 
-module.exports = (driver)=>{
+module.exports = async (driver)=>{
     var page = new Page(driver)
-    page.open(base + '/form.2.html')
+    await page.open(base + '/form.2.html')
 
     page.search = async (file)=>{
         await page.input('#file-no', file)

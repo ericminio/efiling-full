@@ -18,16 +18,16 @@ describe('Form2 archiving', function() {
     })
 
     it('works', async ()=> {
-        page = Form2CreationPage(driver)
+        page = await Form2CreationPage(driver)
         await page.search('CA12345')
         await page.setPhone('7783501234')
         await page.save()
 
-        page = MyDocumentsPage(driver)
-        expect(await page.casesSize()).to.equal(1)
+        page = await MyDocumentsPage(driver)
+        expect(await page.caseListSize()).to.equal(1)
 
         await page.select(1)
         await page.archive()
-        expect(await page.casesSize()).to.equal(0)
+        expect(await page.caseListSize()).to.equal(0)
     })
 })

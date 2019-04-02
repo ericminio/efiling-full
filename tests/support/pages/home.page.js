@@ -1,11 +1,11 @@
 const { base } = require('./commons')
 const { Page } = require('./page')
 
-module.exports = (driver)=>{
+module.exports = async (driver)=>{
     var page = new Page(driver)
-    page.open(base)
+    await page.open(base)
 
-    page.casesSize = async ()=>{
+    page.caseListSize = async ()=>{
         await page.wait(1000)
         return (await page.list('table#my-cases tbody tr')).length
     }

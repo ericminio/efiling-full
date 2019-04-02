@@ -1,9 +1,10 @@
 const { base } = require('./commons')
 const { Page } = require('./page')
 
-module.exports = (driver)=>{
+module.exports = async (driver)=>{
     var page = new Page(driver)
-    page.open(base + '/my-documents.html')
+    await page.open(base + '/my-documents.html')
+    await page.wait(1000)
 
     page.select = async function(id) {
         await page.click('#select-'+id)
@@ -16,7 +17,7 @@ module.exports = (driver)=>{
         await page.click('#download-button')
         await page.wait(3000)
     }
-    page.casesSize = async function() {
+    page.caseListSize = async function() {
         await page.wait(1000)
         return (await page.list('table#my-cases tbody tr')).length
     }

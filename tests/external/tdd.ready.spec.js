@@ -25,7 +25,7 @@ describe('Selenium', function() {
     })
 
     afterEach(async ()=> {
-        server.close()
+        await server.close()
         await driver.quit()
     })
 

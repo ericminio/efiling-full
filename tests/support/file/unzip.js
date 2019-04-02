@@ -12,14 +12,15 @@ const extractFileNo = function(page) {
     return fileNo;
 }
 const read = function(entry, resolve) {
-    let file = { path:entry.path }
-    let json = new Transform();
+    let json = new Transform()
     json._writableState.objectMode = true;
     json._transform = function(data) {
-        let page = data.formImage.Pages[0];
-        file.fileno = extractFileNo(page)
-        resolve(file)
-    };
+        let page = data.formImage.Pages[0]
+        resolve({
+            path:entry.path,
+            fileno:extractFileNo(page)
+        })
+    }
     entry.pipe(new PDFParser()).pipe(json)
 }
 const unzip = function(file) {
