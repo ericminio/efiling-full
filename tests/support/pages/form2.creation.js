@@ -3,7 +3,7 @@ const { Page } = require('./page')
 
 module.exports = async (driver)=>{
     var page = new Page(driver)
-    await page.open(base + '/form.2.html')
+    await page.open(base + '/form2')
 
     page.search = async (file)=>{
         await page.input('#file-no', file)
