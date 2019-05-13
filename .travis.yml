@@ -14,15 +14,19 @@ install:
   - yarn
   - cd $TRAVIS_BUILD_DIR/hub/src/test/support/fake.cso
   - yarn
+  - cd $TRAVIS_BUILD_DIR/hub/src/test/support/fake.object.repository
+  - yarn
   - cd $TRAVIS_BUILD_DIR
   - yarn
 before_script:
   - cd $TRAVIS_BUILD_DIR/hub/src/test/support/fake.cso
   - npm run start &
+  - cd $TRAVIS_BUILD_DIR/hub/src/test/support/fake.object.repository
+  - npm run start &
   - cd $TRAVIS_BUILD_DIR/hub
-  - mvn test-compile exec:java -Pagainst-fake-cso &
+  - mvn compile exec:java -Pagainst-fake-servers &
   - cd $TRAVIS_BUILD_DIR/api
-  - export HUB_URL=http://localhost:8888
+  - export HUB_URL=http://localhost:8080
   - export PGHOST=localhost
   - export PGDATABASE=ci
   - export PGUSER=postgres
