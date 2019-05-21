@@ -23,6 +23,7 @@ describe('Form2 creation', function() {
 
         page = await Form2CreationPage(driver)
         await page.search('CA12345')
+        await page.continue()
         await page.setPhone('7783501234')
         await page.save()
 

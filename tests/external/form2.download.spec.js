@@ -27,10 +27,12 @@ describe('Form2 download', function() {
     it('works', async ()=> {
         page = await Form2CreationPage(driver)
         await page.search('CA11111')
+        await page.continue()
         await page.setPhone('7783501111')
         await page.save()
         page = await Form2CreationPage(driver)
         await page.search('CA22222')
+        await page.continue()
         await page.setPhone('7783502222')
         await page.save()
 
