@@ -14,6 +14,10 @@ Page.prototype.click = async function(selector) {
     let element = await this.driver.findElement(By.css(selector))
     await element.click()
 }
+Page.prototype.element = async function(selector) {
+    let element = await this.driver.findElement(By.css(selector))
+    return element
+}
 Page.prototype.list = async function(selector) {
     let elements = await this.driver.findElements(By.css(selector))
     return elements

@@ -1,9 +1,17 @@
 const { expect } = require('chai')
 const { firefox } = require('../support/pages/commons')
 const { cleanDatabase } = require('../support/data/clean.database')
-const { HomePage, Form2CreationPage, caseListSize } = require('../support/pages')
+const {
+    HomePage,
+    Form2CreationPage,
+    Form2PreviewPage,
+    Form2ConfirmPayment,
+    Form2PaymentReceipt,
+    caseListSize,
+    caseStatus
+} = require('../support/pages')
 
-describe('Form2 creation', function() {
+describe('Form2 submission', function() {
 
     var driver
     var page
@@ -25,9 +33,18 @@ describe('Form2 creation', function() {
         await page.search('CA12345')
         await page.continueToForm()
         await page.setPhone('7783501234')
-        await page.save()
+        await page.continueToPreview()
 
-        page = await HomePage(driver)
+        page = await Form2PreviewPage(driver)
+        await page.proceed()
+
+        page = await Form2ConfirmPayment(driver)
+        await page.confirm()
+
+        page = await Form2PaymentReceipt(driver)
+        await page.done()
+
         expect(await caseListSize(page)).to.equal(1)
+        expect(await caseStatus(page)).to.equal('Submitted')
     })
 })

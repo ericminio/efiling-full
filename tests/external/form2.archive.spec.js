@@ -20,7 +20,7 @@ describe('Form2 archiving', function() {
     it('works', async ()=> {
         page = await Form2CreationPage(driver)
         await page.search('CA12345')
-        await page.continue()
+        await page.continueToForm()
         await page.setPhone('7783501234')
         await page.save()
 

@@ -10,7 +10,7 @@ module.exports = async (driver)=>{
         await page.click('#find-button')
         await page.wait(1000)
     }
-    page.continue = async ()=>{
+    page.continueToForm = async ()=>{
         await page.click('#continue-to-form')
     }
     page.setPhone = async (value)=>{
@@ -18,6 +18,9 @@ module.exports = async (driver)=>{
     }
     page.save = async ()=>{
         await page.click('#save-as-draft')
+    }
+    page.continueToPreview = async ()=>{
+        await page.click('#continue')
     }
 
     return page
