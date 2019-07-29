@@ -1,14 +1,16 @@
+dist: trusty
 language: node_js
 node_js:
   - "10.15.1"
-jdk: openjdk8
 env:
   - MOZ_HEADLESS=1
 addons:
   firefox: "65.0"
 services:
   - postgresql
+jdk: openjdk8
 install:
+  - java -version
   - cd $TRAVIS_BUILD_DIR/frontend
   - yarn
   - cd $TRAVIS_BUILD_DIR/api
