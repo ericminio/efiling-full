@@ -26,6 +26,8 @@ before_script:
   - npm run start &
   - cd $TRAVIS_BUILD_DIR/hub/src/test/support/fake.object.repository
   - npm run start &
+  - cd $TRAVIS_BUILD_DIR/hub/src/test/support/fake.webcats
+  - npm run start &
   - cd $TRAVIS_BUILD_DIR/hub
   - mvn compile exec:java -Pagainst-fake-servers &
   - cd $TRAVIS_BUILD_DIR/api
