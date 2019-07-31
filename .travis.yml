@@ -19,6 +19,8 @@ install:
   - yarn
   - cd $TRAVIS_BUILD_DIR/hub/src/test/support/fake.object.repository
   - yarn
+  - cd $TRAVIS_BUILD_DIR/hub/src/test/support/fake.webcats
+  - yarn
   - cd $TRAVIS_BUILD_DIR
   - yarn
 before_script:
