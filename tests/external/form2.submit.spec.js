@@ -8,7 +8,8 @@ const {
     Form2ConfirmPayment,
     Form2PaymentReceipt,
     caseListSize,
-    caseStatus
+    caseStatus,
+    packageNumber
 } = require('../support/pages')
 
 describe('Form2 submission', function() {
@@ -42,6 +43,7 @@ describe('Form2 submission', function() {
         await page.confirm()
 
         page = await Form2PaymentReceipt(driver)
+        expect(await packageNumber(page)).to.equal('7181')
         await page.done()
 
         expect(await caseListSize(page)).to.equal(1)

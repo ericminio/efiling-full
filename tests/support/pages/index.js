@@ -7,5 +7,6 @@ module.exports = {
     MyDocumentsPage:require('./my.documents'),
 
     caseListSize:require('./case.list.size').caseListSize,
-    caseStatus:require('./case.status').caseStatus
+    caseStatus:require('./case.status').caseStatus,
+    packageNumber:require('./package.number').packageNumber
 }
