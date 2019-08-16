@@ -32,6 +32,7 @@ before_script:
   - npm run start &
   - cd $TRAVIS_BUILD_DIR/hub
   - mvn compile exec:java -Pagainst-fake-servers &
+  - sleep 60
   - cd $TRAVIS_BUILD_DIR/api
   - export HUB_URL=http://localhost:8080
   - export PGHOST=localhost
@@ -49,6 +50,6 @@ before_script:
   - npm run start &
   - cd $TRAVIS_BUILD_DIR
   - export PATH=$PATH:$TRAVIS_BUILD_DIR/tests/support/webdriver/linux
-  - sleep 60
+  - sleep 30
 script:
   - npm run test
